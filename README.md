@@ -29,8 +29,10 @@ version := "1.0-SNAPSHOT"
 ### ElasticCache
 
 
+
 ### RDS
 
+[Slick](http://slick.typesafe.com/) and it's integrated by [play-hikaricp](https://github.com/edulify/play-hikaricp.edulify.com).
 
 ### CloudSearch
 
