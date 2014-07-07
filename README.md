@@ -28,11 +28,63 @@ version := "1.0-SNAPSHOT"
 
 ### ElasticCache
 
+play2-aws makes possible to use ElasticCache (Memcached) as back-end of Play's Cache API by [play2-memcached](https://github.com/mumoshu/play2-memcached).
+
+In the local development environment, you can use Ehcache in your JavaVM by configuration below:
+
+```
+# Disable Memcached in development mode
+memcachedplugin=disabled
+
+# Disable Ehcache if you want to use Memcached
+#ehcacheplugin=disabled
+
+# Memcached host and port
+#memcached.host="xxx.xxx.xxx.xxx:11211"
+
+# Memcached timeout (seconds)
+#memcached.timeout=1800
+```
+
+In the production environment, you can replace Ehcache with Memcached by modifying `conf/application.conf` as below:
+
+```
+# Disable Memcached in development mode
+#memcachedplugin=disabled
+
+# Disable Ehcache if you want to use Memcached
+ehcacheplugin=disabled
+
+# Memcached host and port
+memcached.host="xxx.xxx.xxx.xxx:11211"
+
+# Memcached timeout (seconds)
+memcached.timeout=1800
+```
 
 
 ### RDS
 
 [Slick](http://slick.typesafe.com/) and it's integrated by [play-hikaricp](https://github.com/edulify/play-hikaricp.edulify.com).
+
+Configure connection pool settings in `conf/application.conf`.
+
+```
+dbplugin=disabled
+db.default.driver=com.mysql.jdbc.Driver
+db.default.url="jdbc:mysql://localhost:3306/test"
+db.default.user=root
+db.default.password=""
+db.default.logStatements=true
+
+db.default.partitionCount=1
+db.default.maxConnectionsPerPartition=4
+db.default.minConnectionsPerPartition=1
+
+db.default.acquireRetryDelay=4000
+db.default.maxConnectionAge=2000000
+db.default.initSQL="SELECT 1"
+```
 
 ### CloudSearch
 
@@ -63,6 +115,13 @@ cloudsearch.search(classOf[Job],
     ...
   }
 }
+```
+
+Configure CloudSearch URL settings in `conf/application.conf`.
+
+```
+cloudsearch.search.url="http://xxxx.cloudsearch.amazonaws.com/xxxx/search"
+cloudsearch.register.url="http://xxxx.cloudsearch.amazonaws.com/xxxx/documents/batch"
 ```
 
 ### DynamoDB
