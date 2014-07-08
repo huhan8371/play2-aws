@@ -1,4 +1,4 @@
-package com.codebreak.play2aws
+package jp.co.bizreach.play2aws
 
 import _root_.java.io.File
 import com.typesafe.config.ConfigFactory

@@ -1,4 +1,4 @@
-package com.codebreak.play2aws
+package jp.co.bizreach.play2aws
 
 /**
  * Provides entry point to API for AWS services.

@@ -91,7 +91,7 @@ db.default.initSQL="SELECT 1"
 CloudSearch API is provided by [cloudsearch4s](https://github.com/bizreach/cloudsearch4s).
 
 ```scala
-import com.codebreak.play2aws.AWS
+import jp.co.bizreach.play2aws.AWS
 
 val cloudsearch = AWS.CloudSearch()
 
