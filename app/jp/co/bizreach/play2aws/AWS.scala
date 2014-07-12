@@ -15,8 +15,16 @@ object AWS {
     )
   )
 
-  def DynamoDB() = {
-
+  /**
+   * Returns the implicit DynamoDB instance.
+   */
+  implicit def DynamoDB() = {
+    (for {
+      accessKeyId     <- Config.get("dynamodb.accessKeyId")
+      secretAccessKey <- Config.get("dynamodb.secretAccessKey")
+    } yield {
+      awscala.dynamodbv2.DynamoDB(accessKeyId, secretAccessKey)
+    }).getOrElse(awscala.dynamodbv2.DynamoDB.local())
   }
 
 }

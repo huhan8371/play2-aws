@@ -14,6 +14,7 @@ Play Framework2 with AWS support.
 
 - S3
 - SES
+- SQS
 
 ## Usage
 
@@ -128,4 +129,25 @@ cloudsearch.register.url="http://xxxx.cloudsearch.amazonaws.com/xxxx/documents/b
 
 DynamoDB API is provided by [dynamodb4s](https://github.com/bizreach/dynamodb4s).
 
-TODO
+```scala
+import jp.co.bizreach.play2aws.AWS
+import jp.co.bizreach.dynamodb4s._
+
+implicit val db = AWS.DynamoDB()
+
+// Put with case class
+Members.put(Member(1, "Japan", "Naoki Takezoe", 30, "BizReach"))
+
+// Query with case class mapping
+val list: Seq[Member] = Members.query.keyConditions { t =>
+  t.id -> Condition.eq(1) :: t.country -> Condition.eq("Japan") :: Nil
+}.as[Member]
+```
+
+Configure DynamoDB access settings in `conf/application.conf`. If these configuration entries don't exist,
+DynamoDB client accesses to the local DynamoDB (http://localhost:8000).
+
+```
+dynamodb.accessKeyId=xxx
+dynamodb.secretAccessKey=xxx
+```
