@@ -3,6 +3,11 @@ play2-aws
 
 Play Framework2 with AWS support.
 
+## Scala and Play version
+
+- Play 2.2.3
+- Scala 2.10
+
 ## Supported AWS services
 
 - ElasticCache (Memcached)
